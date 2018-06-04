@@ -6,5 +6,18 @@
   tasks:
     - name: sudoer
       lineinfile: "dest=/etc/sudoers line='faridarjmand      ALL=(ALL)       NOPASSWD: ALL'" 
+    
     - name: no logging for ansible user
       lineinfile: "dest=/etc/sudoers line='Defaults: ansible !log_output'"
+
+    - name: log sudo commands 1
+      lineinfile: "dest=/etc/sudoers line='Defaults log_output'"
+
+    - name: log sudo commands 2
+      lineinfile: "dest=/etc/sudoers line='Defaults!/usr/bin/sudoreplay !log_output'"
+
+    - name: log sudo commands 3
+      lineinfile: "dest=/etc/sudoers line='Defaults!/usr/local/bin/sudoreplay !log_output'"
+
+    - name: log sudo commands 4
+      lineinfile: "dest=/etc/sudoers line='Defaults!REBOOT !log_output'"
