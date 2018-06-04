@@ -1,8 +1,8 @@
 ---
-- hosts: 172.22.128.211
-  user: mon
+- hosts: all
+  user: ansible
   tasks:
     - name: disable script/reset user
-      shell: sudo passwd -l appuser
+      shell: sudo passwd -l farid
       register: lock
     - debug: msg="{{ lock.stdout_lines }}"
