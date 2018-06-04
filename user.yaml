@@ -1,12 +1,12 @@
 ---
 - hosts: all
-  user: ansible
-  sudo: yes
+  user: root
+  sudo: no
 
   #Define user and password variables
   vars:
-    - password : farid1373
-    - user : f.arjmand
+    - password : arjmand
+    - user : farid
     - group: root
 
   # Define task to add user
@@ -30,17 +30,29 @@
 
     - name: apply password policies to support users
       shell: passwd -x 30 {{ user }}; chage -d 0 {{ user }}
+      
     - name: lock users
       shell: passwd -u {{ user }}
+      
     - name: lock users
       shell: passwd -l {{ user }}
+      register: lock
+    - debug: msg="{{ lock.stdout_lines }}"
+    
     - name: password change force
       shell: passwd -f {{ user }}
+      
     - name: password change force
       shell: chage -d 0 {{ user }}
+      
     - name: change expiration
       shell: passwd -x -1 {{ user }}
+      
     - name: apply password policies to support users
       shell: passwd -x 30 {{ item }}; passwd -f {{ item }}
+   
     - name: change expiration
-      shell: chage -d -1 mmotiee
+      shell: chage -d -1 {{ user }}
+    
+    - name: changepass
+      user: name={{ user }} password={{ password }} update_password=always
