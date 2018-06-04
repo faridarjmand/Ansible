@@ -1,0 +1,17 @@
+---
+- host: solaris
+  user: ansible
+  sudo: yes
+  
+  vars:
+    - ip : 127.0.0.1
+
+  tasks:
+    - name: MCILOGGER
+      lineinfile: "dest=/etc/syslog.conf line='*.info	@{{ ip }}'"
+      
+    - name: set ipf.log on syslog
+      lineinfile: dest=/etc/syslog.conf line="local0.debug{{'\t'}}/var/adm/ipf.log"
+
+    - name: restart syslog
+      shell: /usr/sbin/svcadm restart system-log
