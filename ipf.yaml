@@ -14,3 +14,9 @@
         insertafter: "^.*IPFILTER([\\s-]+)?Rule[s]?.*"
         state: "present"
         backup: "yes"
+
+    - name: add ipf.log file
+      file: path=/var/adm/ipf.log  state=touch owner=root group=root mode=0744
+
+    - name: set ipf.log on syslog
+      lineinfile: dest=/etc/syslog.conf line="local0.debug{{'\t'}}/var/adm/ipf.log"
