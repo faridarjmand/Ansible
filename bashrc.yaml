@@ -1,0 +1,203 @@
+---
+- hosts: linux
+  user: ansible
+  become: yes
+
+  tasks:
+    - name: "add line"
+      lineinfile:
+        dest: "/etc/bashrc"
+        line: "export CIP=$(who am i | awk \'{print $5}\' | tr -d \"(|)\")"
+        state: "present"
+        backup: "yes"
+
+    - name: "add line"
+      lineinfile:
+        dest: "/etc/bashrc"
+        line: "export PROMPT_COMMAND='RET_VAL=$?;logger -p local6.debug \"$CIP - $(whoami) [$$]: $(history 1 | sed \"s/^[ ]*[0-9]\\+[ ]*//\" ) [$RET_VAL]\"'"
+        state: "present"
+
+    - name: "restart service"
+      service:
+        name: "rsyslog"
+        state: "restarted"
+        
+            - name: "create log file"
+      shell: "test -f /var/adm/bash_commands.log || touch /var/adm/bash_commands.log && chmod 600 /var/adm/bash_commands.log"
+
+    - name: "syslog"
+      lineinfile:
+        dest: "/etc/syslog.conf"
+        line: "local6.debug	/var/adm/bash_commands.log"
+        state: "present"
+        backup: "yes"
+
+    - name: "add line"
+      lineinfile:
+        dest: "/etc/profile"
+        line: "export CIP=$(echo ${SSH_CONNECTION} | awk '{print $1}')"
+        state: "present"
+        backup: "yes"
+
+    - name: "add line"
+      lineinfile:
+        dest: "/etc/profile"
+        line: "export U=$(who am i | awk '{print $1}')"
+        state: "present"
+
+    - name: "add line"
+      lineinfile:
+        dest: "/etc/profile"
+        line: "export PROMPT_COMMAND='RET_VAL=$?;logger -p local6.debug \"$CIP - $U [$$]: $(history | cut -c 8- | tail -1) [$RET_VAL]\"'"
+        state: "present"
+
+    - name: "add line"
+      lineinfile:
+        dest: "/etc/profile"
+        line: "readonly CIP"
+        state: "present"
+
+    - name: "add line"
+      lineinfile:
+        dest: "/etc/profile"
+        line: "readonly U"
+        state: "present"
+
+    - name: "add line"
+      lineinfile:
+        dest: "/etc/profile"
+        line: "readonly PROMPT_COMMAND"
+        state: "present"
+
+    - name: "create log file"
+      shell: "test -f /.bashrc || touch /.bashrc && chmod 600 /.bashrc"
+
+    - name: "add line"
+      lineinfile:
+        dest: "/.bashrc"
+        line: "export CIP=$(echo ${SSH_CONNECTION} | awk '{print $1}')"
+        state: "present"
+        backup: "yes"
+
+    - name: "add line"
+      lineinfile:
+        dest: "/.bashrc"
+        line: "export U=$(who am i | awk '{print $1}')"
+        state: "present"
+
+    - name: "add line"
+      lineinfile:
+        dest: "/.bashrc"
+        line: "export PROMPT_COMMAND='RET_VAL=$?;logger -p local6.debug \"$CIP - $U [$$]: $(history | cut -c 8- | tail -1) [$RET_VAL]\"'"
+        state: "present"
+
+    - name: "add line"
+      lineinfile:
+        dest: "/.bashrc"
+        line: "readonly CIP"
+        state: "present"
+
+    - name: "add line"
+      lineinfile:
+        dest: "/.bashrc"
+        line: "readonly U"
+        state: "present"
+
+    - name: "add line"
+      lineinfile:
+        dest: "/.bashrc"
+        line: "readonly PROMPT_COMMAND"
+        state: "present"
+
+    - name: "restart service"
+      shell: "/usr/sbin/svcadm restart system-log"
+      
+          - name: "create log file"
+      shell: "test -f /var/adm/bash_commands.log || touch /var/adm/bash_commands.log && chmod 600 /var/adm/bash_commands.log"
+
+    - name: "syslog"
+      lineinfile:
+        dest: "/etc/syslog.conf"
+        line: "local6.debug	/var/adm/bash_commands.log"
+        state: "present"
+        backup: "yes"
+
+    - name: "add line"
+      lineinfile:
+        dest: "/etc/profile"
+        line: "export CIP=$(echo ${SSH_CONNECTION} | awk '{print $1}')"
+        state: "present"
+        backup: "yes"
+
+    - name: "add line"
+      lineinfile:
+        dest: "/etc/profile"
+        line: "export U=$(who am i | awk '{print $1}')"
+        state: "present"
+
+    - name: "add line"
+      lineinfile:
+        dest: "/etc/profile"
+        line: "export PROMPT_COMMAND='RET_VAL=$?;logger -p local6.debug \"$CIP - $U [$$]: $(history | cut -c 8- | tail -1) [$RET_VAL]\"'"
+        state: "present"
+
+    - name: "add line"
+      lineinfile:
+        dest: "/etc/profile"
+        line: "readonly CIP"
+        state: "present"
+
+    - name: "add line"
+      lineinfile:
+        dest: "/etc/profile"
+        line: "readonly U"
+        state: "present"
+
+    - name: "add line"
+      lineinfile:
+        dest: "/etc/profile"
+        line: "readonly PROMPT_COMMAND"
+        state: "present"
+
+    - name: "create log file"
+      shell: "test -f /.bashrc || touch /.bashrc && chmod 600 /.bashrc"
+
+    - name: "add line"
+      lineinfile:
+        dest: "/.bashrc"
+        line: "export CIP=$(echo ${SSH_CONNECTION} | awk '{print $1}')"
+        state: "present"
+        backup: "yes"
+
+    - name: "add line"
+      lineinfile:
+        dest: "/.bashrc"
+        line: "export U=$(who am i | awk '{print $1}')"
+        state: "present"
+
+    - name: "add line"
+      lineinfile:
+        dest: "/.bashrc"
+        line: "export PROMPT_COMMAND='RET_VAL=$?;logger -p local6.debug \"$CIP - $U [$$]: $(history | cut -c 8- | tail -1) [$RET_VAL]\"'"
+        state: "present"
+
+    - name: "add line"
+      lineinfile:
+        dest: "/.bashrc"
+        line: "readonly CIP"
+        state: "present"
+
+    - name: "add line"
+      lineinfile:
+        dest: "/.bashrc"
+        line: "readonly U"
+        state: "present"
+
+    - name: "add line"
+      lineinfile:
+        dest: "/.bashrc"
+        line: "readonly PROMPT_COMMAND"
+        state: "present"
+
+    - name: "restart service"
+      shell: "/usr/sbin/svcadm restart system-log"
