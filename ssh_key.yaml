@@ -1,14 +1,15 @@
 ---
 - hosts: solaris
-  user: navid
+  user: farid
 
   vars:
-    - key: "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAi+2nLH4TROU1WVwcWGep4CUkLOEeXvtvD42Da4iYypaIhzzA/SFT8MYnZidBWs1FteqA88+HXppi7kfZhxVyK/SOhyZI00mk5GcZV6K50cB4b2ZbqKNW5ZTwXAelXJOvLxoKhTbhlLqBXBqHgyaKOO+Nl5YHxpO+w5wDyJMF1w2fhgmLUV/Exnk3OpqyNOmBdBez7SydqccIpU/FwUpgl43KfN9vAkfKlV/t3LISQOyNEspcTQDoAgLqCpQVqGcT4GdJPPYiWrGCxwpCI2XzPe1uLtm09vCRokKdqanQNk0E7QyTDgsJbjhyDZBFnnYwLi8hC/GfJme4gFIsnLTYMQ=="
-
+    - key: "ssh-rsa AAAAB3NzaC1yciYypaIh4GFIsnLTYMQ=="
+    - user : farid
+    
   tasks:
     - name: add key to authorized keys
-      shell: "mkdir -p /export/home/navid/.ssh 2>/dev/null;chmod 700 /export/home/navid/.ssh;touch /export/home/navid/.ssh/authorized_keys 2>/dev/null;chmod 600 /export/home/navid/.ssh/authorized_keys"
+      shell: "mkdir -p /export/home/{{ user }}/.ssh 2>/dev/null;chmod 700 /export/home/{{ user }}/.ssrth;touch /expo/home/{{ user }}/.ssh/authorized_keys 2>/dev/null;chmod 600 /export/home/{{ user }}/.ssh/authorized_keys"
     - name: add key to authorized keys
       lineinfile:
-        dest: "/export/home/navid/.ssh/authorized_keys"
+        dest: "/export/home/{{ user }}/.ssh/authorized_keys"
         line: "{{ key }}"
