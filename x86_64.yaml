@@ -1,8 +1,0 @@
-- name: print out hosts architectures
-  hosts: all
-  gather_facts: true
-  tasks:
-  - debug: var=ansible_architecture
-  - name: show just x86_64
-    shell: echo "This Is x86_64"
-    when: ansible_architecture == "x86_64"
