@@ -42,3 +42,13 @@
       shell: uname -a
       register: uname
     - debug: msg="{{ uname.stdout_lines }}"
+    
+    - name: get listened ports
+      shell: "netstat -ntlp"
+      register: tcp
+    - debug: msg="{{ tcp.stdout }}"
+
+    - name: ps -eo
+      shell: "ps -eo pcpu,user,args | sort -r -k1 | head -n5"
+      register: ps
+    - debug: msg="{{ ps.stdout_lines }}"
