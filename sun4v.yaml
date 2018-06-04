@@ -1,0 +1,8 @@
+- name: print out hosts architectures
+  hosts: ALL
+  gather_facts: true
+  tasks:
+  - debug: var=ansible_architecture
+  - name: show just sun4v
+    shell: echo "hi sun4v"
+    when: ansible_architecture == "sun4v"

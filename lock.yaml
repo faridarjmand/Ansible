@@ -1,0 +1,8 @@
+---
+- hosts: 172.22.128.211
+  user: mon
+  tasks:
+    - name: disable script/reset user
+      shell: sudo passwd -l appuser
+      register: lock
+    - debug: msg="{{ lock.stdout_lines }}"

@@ -1,0 +1,7 @@
+- hosts: all
+  gather_facts: no
+  tasks:
+    - shell: ps -eo pcpu,user,args | sort -r -k1 | head -n5
+      register: ps
+
+    - debug: var=ps.stdout_lines

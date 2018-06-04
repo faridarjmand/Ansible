@@ -1,0 +1,5 @@
+- name: print out hosts architectures
+  hosts: all
+  gather_facts: true
+  tasks:
+  - debug: var=ansible_architecture

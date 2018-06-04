@@ -1,0 +1,13 @@
+- name: copy files to another server
+  hosts: jboss
+  gather_facts: true
+  become: true
+  sudo: yes
+  tasks:
+  - copy:
+      src: /home/f.arjmand/ansible/jps.sh
+      dest: /export/home/f.arjmand/
+      mode: 0700
+      owner: f.arjmand
+      group=devops
+      force=true

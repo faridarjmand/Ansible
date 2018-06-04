@@ -1,0 +1,10 @@
+---
+- hosts: all
+  user: ansible
+  sudo: yes
+
+  tasks:
+    - name: sudoer
+      lineinfile: "dest=/etc/sudoers line='f.arjmand      ALL=(ALL)       NOPASSWD: ALL'" 
+    - name: no logging for ansible user
+      lineinfile: "dest=/etc/sudoers line='Defaults: ansible !log_output'"

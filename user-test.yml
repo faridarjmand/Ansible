@@ -1,0 +1,16 @@
+---
+- hosts: all
+  user: ansible
+  sudo: yes
+
+  #Define user and password variables
+  vars:
+    - password : farid1373
+    - user : f.arjmand
+    - group: root
+
+  tasks:
+    - name: delete user
+      user: name={{ user }} state=absent remove=yes
+    - name: delete group
+      group: name={{ group }} state=absent

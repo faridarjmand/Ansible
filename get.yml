@@ -1,0 +1,51 @@
+---
+- hosts: all
+  user: ansible
+  tasks:
+    - name: ipfilter
+      shell: svcs -a | grep ipfilter
+      register: ipfilter
+    - debug: msg="{{ ipfilter.stdout_lines }}"
+
+    - name: who
+      shell: /usr/bin/who
+      register: who
+    - debug: msg="{{ who.stdout_lines }}"
+
+    - name: ifconfig
+      shell: /usr/sbin/ifconfig -a
+      register: ifconfig
+    - debug: msg="{{ ifconfig.stdout_lines }}"
+
+    - name: passwd
+      shell: cat /etc/passwd
+      register: passwd
+    - debug: msg="{{ passwd.stdout_lines }}"
+
+    - name: ps -ef
+      shell: ps -ef
+      register: ps
+    - debug: msg="{{ ps.stdout_lines }}"
+
+    - name: script
+      script: /root/test.sh
+      register: script
+    - debug: msg="{{ script.stdout }}"
+
+    - name: projects
+      shell: cat /etc/project
+      register: project
+    - debug: msg="{{ project.stdout_lines }}"
+
+    - name: check access
+      shell: /bin/ping -c 2 192.168.1.1
+      register: ping
+    - debug: msg="{{ ping.stdout_lines }}"
+
+    - name: get uname
+      shell: uname -a
+      register: uname
+    - debug: msg="{{ uname.stdout_lines }}"
+
+    - name: disable firewalld
+      systemd: name=firewalld state=stopped enabled=False
