@@ -2,4 +2,22 @@
   hosts: all
   gather_facts: true
   tasks:
-  - debug: var=ansible_architecture
+  - debug: 
+       var: ansible_architecture
+       var: ansible_os_family
+       
+  - name: show just x86_64
+    shell: echo "This Is x86_64 > $HOME/arch.txt"
+    when: ansible_architecture == "x86_64"
+    
+  - name: show just i386
+    shell: echo "This Is i386 > $HOME/arch.txt"
+    when: ansible_architecture == "i386"
+    
+  - name: show just sun4u
+    shell: echo "This Is sun4u > $HOME/arch.txt"
+    when: ansible_architecture == "sun4u"
+    
+  - name: show just sun4v
+    shell: echo "This Is sun4v > $HOME/arch.txt"
+    when: ansible_architecture == "sun4v"
