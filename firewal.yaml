@@ -1,6 +1,0 @@
----
-- hosts: all
-  user: ansible
-  tasks:
-    - name: disable firewalld
-      systemd: name=firewalld state=stopped enabled=False
