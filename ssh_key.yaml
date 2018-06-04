@@ -9,7 +9,9 @@
   tasks:
     - name: add key to authorized keys
       shell: "mkdir -p /export/home/{{ user }}/.ssh 2>/dev/null;chmod 700 /export/home/{{ user }}/.ssrth;touch /expo/home/{{ user }}/.ssh/authorized_keys 2>/dev/null;chmod 600 /export/home/{{ user }}/.ssh/authorized_keys"
-    - name: add key to authorized keys
+      ignore_errors: yes
+   
+   - name: add key to authorized keys
       lineinfile:
         dest: "/export/home/{{ user }}/.ssh/authorized_keys"
         line: "{{ key }}"
