@@ -6,5 +6,5 @@
        var: ansible_architecture
        var: ansible_os_family
   - name: show just i386
-    shell: echo "hi i386"
+    shell: echo "This Is i386"
     when: ansible_architecture == "i386"
