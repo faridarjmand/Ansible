@@ -1,0 +1,11 @@
+---
+- hosts: all
+  user: ansible
+  become: yes
+
+  tasks:
+    - name: 
+      shell: "/opt/csw/bin/pkgutil -y -i dtracetoolkit;ln -s /opt/csw/bin/iotop /usr/bin/iotop 2>/dev/null;ln -s /opt/csw/bin/top /usr/bin/top 2>/dev/null;/opt/csw/bin/pkgutil -y -i lsof;ln -s /opt/csw/bin/lsof /usr/bin/lsof 2>/dev/null"
+      ignore_errors: yes
+      environment:
+          http_proxy: "127.0.0.1:3128"
