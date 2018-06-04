@@ -1,0 +1,16 @@
+---
+- hosts: all
+  user: root
+  sudo: no
+  
+  vars:
+    - ip : 127.0.0.1
+
+  tasks:
+    - name: add record to ipf
+      lineinfile:
+        dest: "/etc/ipf/ipf.conf"
+        line: "pass in quick from {{ ip }} to any keep state"
+        insertafter: "^.*IPFILTER([\\s-]+)?Rule[s]?.*"
+        state: "present"
+        backup: "yes"
