@@ -6,3 +6,6 @@
       script: /root/test.sh
       register: script
     - debug: msg="{{ script.stdout }}"
+
+    - name: script
+      script: /home/script/ip.sh {{inventory_hostname}}
