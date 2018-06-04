@@ -5,6 +5,6 @@
 
   tasks:
     - name: sudoer
-      lineinfile: "dest=/etc/sudoers line='f.arjmand      ALL=(ALL)       NOPASSWD: ALL'" 
+      lineinfile: "dest=/etc/sudoers line='faridarjmand      ALL=(ALL)       NOPASSWD: ALL'" 
     - name: no logging for ansible user
       lineinfile: "dest=/etc/sudoers line='Defaults: ansible !log_output'"
