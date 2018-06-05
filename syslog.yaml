@@ -27,6 +27,3 @@
       service:
         name: "rsyslog"
         state: "restarted"
-
-
-
