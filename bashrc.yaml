@@ -1,54 +1,29 @@
 ---
-- hosts: linux
+- hosts: all
   user: ansible
   become: yes
 
   tasks:
-    - name: "add line"
+    - name: "create bashrc file"
+      shell: "test -f /.bashrc || touch /.bashrc && chmod 600 /.bashrc"
+      
+    - name: "add line to /.bashrc"
       lineinfile:
         dest: "/.bashrc"
         line: "export EDITOR=/bin/vi"
         state: "present"
         backup: "yes"
         
-    - name: "add line"
+    - name: "add line to /etc/bashrc"
       lineinfile:
         dest: "/etc/bashrc"
         line: "export EDITOR=/bin/vi"
         state: "present"
         backup: "yes"
         
-    - name: "add line"
+    - name: "add line to /etc/profile"
       lineinfile:
         dest: "/etc/profile"
         line: "export EDITOR=/bin/vi"
         state: "present"
         backup: "yes"
-
-    - name: "create log file"
-      shell: "test -f /.bashrc || touch /.bashrc && chmod 600 /.bashrc"
-      
-    - name: "create log file"
-      shell: "test -f /var/adm/bash_commands.log || touch /var/adm/bash_commands.log && chmod 600 /var/adm/bash_commands.log"
-
-    - name: "syslog"
-      lineinfile:
-        dest: "/etc/syslog.conf"
-        line: "local6.debug	/var/adm/bash_commands.log"
-        state: "present"
-        backup: "yes"
-
-    - name: "syslog"
-      lineinfile:
-        dest: "/etc/syslog.conf"
-        line: "local6.debug	/var/adm/bash_commands.log"
-        state: "present"
-        backup: "yes"
-
-    - name: "restart service"
-      service:
-        name: "rsyslog"
-        state: "restarted"
-        
-    - name: "restart service"
-      shell: "/usr/sbin/svcadm restart system-log"
