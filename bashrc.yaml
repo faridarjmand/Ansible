@@ -4,12 +4,12 @@
   become: yes
 
   tasks:
-    - name: "create bashrc file"
-      shell: "test -f /.bashrc || touch /.bashrc && chmod 600 /.bashrc"
+    - name: "create bashrc file or set permission"
+      shell: "test -f $HOME/.bashrc || touch $HOME/.bashrc && chmod 600 $HOME/.bashrc"
       
-    - name: "add line to /.bashrc"
+    - name: "add line to $HOME/.bashrc"
       lineinfile:
-        dest: "/.bashrc"
+        dest: "$HOME/.bashrc"
         line: "export EDITOR=/bin/vi"
         state: "present"
         backup: "yes"
