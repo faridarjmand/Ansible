@@ -9,5 +9,5 @@
       dest: /export/home/faridarjmand/
       mode: 0700
       owner: faridarjmand
-      group=devops
-      force=true
+      group: devops
+      force: true
